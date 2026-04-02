@@ -4,6 +4,10 @@ Terminal renderer for [Claude Buddy](https://github.com/anthropics/claude-code) 
 
 ![Oh My Kira in Ghostty](https://img.shields.io/badge/terminal-Ghostty%20%7C%20Kitty-blue)
 
+<p align="center">
+  <img src="assets/screenshots/demo.gif" alt="Kira demo" width="450">
+</p>
+
 ## Requirements
 
 - **Node.js** >= 18
