@@ -1,0 +1,24 @@
+{
+  "name": "Kira",
+  "author": "robin",
+  "version": "1.0.0",
+  "description": "Anime girl companion - Kira",
+  "format": "spritesheet-grid",
+  "frame_size": { "width": 768, "height": 448 },
+  "grid_cols": 4,
+  "scale": 0.25,
+  "state_map": {
+    "idle":          { "sheet": "dance_idle.png",   "frames": 29, "interval_ms": 100 },
+    "happy":         { "sheet": "dance_idle.png",   "frames": 29, "interval_ms": 80 },
+    "very_happy":    { "sheet": "dance_idle.png",   "frames": 29, "interval_ms": 60 },
+    "working":       { "sheet": "typing.png",       "frames": 17, "interval_ms": 120 },
+    "energy_low":    { "sheet": "typing.png",       "frames": 8,  "interval_ms": 200 },
+    "hunger_low":    { "sheet": "stomach_hit.png",  "frames": 15, "interval_ms": 150 },
+    "error":         { "sheet": "stomach_hit.png",  "frames": 29, "interval_ms": 100 },
+    "critical":      { "sheet": "stomach_hit.png",  "frames": 29, "interval_ms": 80 },
+    "session_start": { "sheet": "dance_idle.png",   "frames": 29, "interval_ms": 80 },
+    "session_end":   { "sheet": "dance_idle.png",   "frames": 10, "interval_ms": 200 },
+    "hygiene_low":   { "sheet": "stomach_hit.png",  "frames": 10, "interval_ms": 200 },
+    "turn":          { "sheet": "dance_idle.png",   "frames": 1,  "interval_ms": 500 }
+  }
+}
