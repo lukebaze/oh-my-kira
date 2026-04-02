@@ -4,8 +4,11 @@ import path from "node:path";
 import { loadArtPack } from "../lib/sprite-loader.js";
 import { resolveVisualState } from "../lib/state-resolver.js";
 import { buildTransmitSequence, buildDeleteSequence } from "../lib/kitty.js";
+import { renderSpeechBubble } from "../lib/speech-bubble.js";
+import { getRandomIdleThought, IDLE_THOUGHTS } from "../lib/idle-thoughts.js";
 
 const PACK_DIR = path.join(import.meta.dirname, "..", "assets", "wpenguin");
+const KIRA_DIR = path.join(import.meta.dirname, "..", "assets", "kira");
 
 describe("end-to-end: state -> visual state -> animation -> kitty output", () => {
   let pack;
@@ -67,5 +70,51 @@ describe("end-to-end: state -> visual state -> animation -> kitty output", () =>
       assert.ok(pack.animations[state], `Missing animation for state: ${state}`);
       assert.ok(pack.animations[state].frames.length > 0, `No frames for state: ${state}`);
     }
+  });
+});
+
+describe("end-to-end: kira pack", () => {
+  let kiraPack;
+
+  before(async () => {
+    kiraPack = await loadArtPack(KIRA_DIR);
+  });
+
+  it("loads all 12 visual states from kira pack", () => {
+    const requiredStates = [
+      "idle", "happy", "very_happy", "working", "energy_low",
+      "hunger_low", "error", "critical", "session_start",
+      "session_end", "hygiene_low", "turn",
+    ];
+    for (const state of requiredStates) {
+      assert.ok(kiraPack.animations[state], `Missing animation for state: ${state}`);
+      assert.ok(kiraPack.animations[state].frames.length > 0, `No frames for state: ${state}`);
+    }
+  });
+
+  it("kira frames are downscaled from 768x448", () => {
+    assert.equal(kiraPack.frameSize.width, 192);
+    assert.equal(kiraPack.frameSize.height, 112);
+  });
+
+  it("kira idle has 29 frames", () => {
+    assert.equal(kiraPack.animations.idle.frames.length, 29);
+  });
+
+  it("kira working has 17 frames", () => {
+    assert.equal(kiraPack.animations.working.frames.length, 17);
+  });
+});
+
+describe("end-to-end: speech bubble + idle thoughts", () => {
+  it("speech bubble renders for a reactive thought", () => {
+    const bubble = renderSpeechBubble("All green! \u2728", 30);
+    assert.ok(bubble.length >= 3);
+    assert.ok(bubble[1].includes("All green!"));
+  });
+
+  it("idle thoughts are available", () => {
+    const thought = getRandomIdleThought();
+    assert.ok(IDLE_THOUGHTS.includes(thought));
   });
 });
