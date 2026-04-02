@@ -12,11 +12,13 @@ describe("calculateLayout", () => {
     assert.equal(layout.innerWidth, 36); // 40 - 4 (2 border + 2 padding)
   });
 
-  it("allocates ~70% of rows to sprite in tall terminal", () => {
+  it("sprite rows are based on image aspect ratio", () => {
+    // With default aspect 1.714 and 36 inner cols, sprite ≈ 36/1.714/2 ≈ 11 rows
     const layout = calculateLayout(40, 40);
-    const spriteRatio = layout.spriteRows / 40;
-    assert.ok(spriteRatio >= 0.55, `Sprite ratio ${spriteRatio} too low`);
-    assert.ok(spriteRatio <= 0.80, `Sprite ratio ${spriteRatio} too high`);
+    assert.ok(layout.spriteRows >= 8, `Sprite rows ${layout.spriteRows} too low`);
+    assert.ok(layout.spriteRows <= 20, `Sprite rows ${layout.spriteRows} too high`);
+    // Stats should start right after sprite
+    assert.equal(layout.statsStartRow, layout.dividerRow + 1);
   });
 
   it("allocates more to stats in short terminal (<20 rows)", () => {
@@ -37,11 +39,13 @@ describe("calculateLayout", () => {
     assert.ok(layout.spriteCols <= 116);
   });
 
-  it("bubble area reduces sprite area when active", () => {
+  it("bubble area shifts sprite start row down", () => {
     const withoutBubble = calculateLayout(40, 30, 0);
     const withBubble = calculateLayout(40, 30, 4);
-    assert.ok(withBubble.spriteRows < withoutBubble.spriteRows);
+    // Sprite start row shifts down by bubble lines
     assert.equal(withBubble.spriteStartRow, withoutBubble.spriteStartRow + 4);
+    // Sprite rows may be clamped by available space
+    assert.ok(withBubble.spriteRows >= 3, "Sprite needs at least 3 rows");
   });
 
   it("returns all required layout properties", () => {

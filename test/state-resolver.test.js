@@ -67,9 +67,9 @@ describe("resolveVisualState", () => {
     state.event = { type: "tests_passed", timestamp: new Date().toISOString() };
     assert.equal(resolveVisualState(state), "very_happy");
   });
-  it("ignores stale events older than 3 seconds", () => {
+  it("ignores stale events older than 10 seconds", () => {
     const state = baseState();
-    const staleTime = new Date(Date.now() - 5000).toISOString();
+    const staleTime = new Date(Date.now() - 15000).toISOString();
     state.event = { type: "tests_passed", timestamp: staleTime };
     state.buddy.stats = { hunger: 85, happiness: 85, energy: 85, hygiene: 85 };
     assert.equal(resolveVisualState(state), "happy");
