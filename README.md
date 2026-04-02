@@ -1,79 +1,44 @@
+<div align="center">
+
 # Oh My Kira
 
-Terminal renderer for [Claude Buddy](https://github.com/anthropics/claude-code) companions. Displays an animated sprite with live stats in your terminal using the [Kitty graphics protocol](https://sw.kovidgoyal.net/kitty/graphics-protocol/).
+**Your coding companion, alive in the terminal.**
 
-![Oh My Kira in Ghostty](https://img.shields.io/badge/terminal-Ghostty%20%7C%20Kitty-blue)
+A real-time animated sprite renderer for [Claude Buddy](https://github.com/anthropics/claude-code) that brings your AI coding companion to life — right next to your code.
 
-<p align="center">
-  <img src="assets/screenshots/demo.gif" alt="Kira demo" width="450">
-</p>
+[![Node.js](https://img.shields.io/badge/node-%3E%3D18-brightgreen?logo=node.js&logoColor=white)](https://nodejs.org)
+[![Terminal](https://img.shields.io/badge/terminal-Ghostty%20%7C%20Kitty-blue?logo=gnometerminal&logoColor=white)](https://ghostty.org)
+[![License: MIT](https://img.shields.io/badge/license-MIT-yellow.svg)](LICENSE)
 
-## Requirements
+<br />
 
-- **Node.js** >= 18
-- **Terminal** with Kitty graphics protocol support (e.g., [Ghostty](https://ghostty.org), [Kitty](https://sw.kovidgoyal.net/kitty/))
-- **Claude Code** with the [claude-buddy plugin](https://github.com/anthropics/claude-code) installed
+<img src="assets/screenshots/demo.gif" alt="Oh My Kira — animated coding companion in terminal" width="520">
 
-## Installation
+<br />
 
-```bash
-git clone https://github.com/lukebaze/oh-my-kira.git
-cd oh-my-kira
-npm install
-npm link
-```
+*Kira reacts to your coding session in real time — mood, stats, speech bubbles, and all.*
 
-This makes `oh-my-kira` available globally in your terminal.
+</div>
 
-## Usage
+---
 
-### Basic
+## What is this?
 
-```bash
-oh-my-kira --watch ~/.claude/buddy/state.json
-```
+Oh My Kira renders an **animated companion** in a terminal pane while you code with Claude. It watches the buddy state file and displays:
 
-### Options
-
-| Flag | Description | Default |
-|------|-------------|---------|
-| `--watch <path>` | Path to buddy state JSON file | `~/.claude/buddy/state.json` |
-| `--art-packs <dir>` | Directory containing art packs | `~/.claude/buddy/art-packs/` |
-
-### Launch from Claude Code
-
-If you have the claude-buddy plugin installed, run:
-
-```
-/buddies launch
-```
-
-This auto-splits your Ghostty terminal and starts the renderer in the right pane.
-
-### Manual split (any terminal)
-
-Open a second pane/tab and run:
-
-```bash
-oh-my-kira --watch ~/.claude/buddy/state.json
-```
-
-## How It Works
-
-The renderer watches `state.json` for changes (written by the claude-buddy plugin during coding sessions) and displays:
-
-- Animated sprite based on buddy mood/state
-- Live stat bars (hunger, happiness, energy, hygiene)
-- XP progress and evolution stage
-- Speech bubbles with thoughts
+- **Animated sprites** that react to mood and activity
+- **Live stat bars** — hunger, happiness, energy, hygiene
+- **XP & evolution** — level up your buddy over time
+- **Speech bubbles** — idle thoughts and reactions
+- **Streak tracking** — consecutive coding days
 
 ```
 +------------------------------------------+
-|          (speech bubble)                  |
+|        "hmm, interesting approach..."     |
 |                                           |
 |            [animated sprite]              |
 |                                           |
-+== Buddy Name ============================+
++== My Linh ===============================+
 | egg -> baby                               |
 | XP ████░░░░░░░░░░░░░░░░ 25               |
 |                                           |
@@ -81,17 +46,57 @@ The renderer watches `state.json` for changes (written by the claude-buddy plugi
 | Happy   ███████████████████░              |
 | Energy  ███████████████████░              |
 | Hygiene ███████████████████░              |
+|                                           |
+| 🔥 8-day streak                           |
 +------------------------------------------+
 ```
 
+## Requirements
+
+| Requirement | Details |
+|------------|---------|
+| **Node.js** | >= 18 |
+| **Terminal** | [Ghostty](https://ghostty.org) or [Kitty](https://sw.kovidgoyal.net/kitty/) (Kitty graphics protocol) |
+| **Claude Code** | With the [claude-buddy](https://github.com/anthropics/claude-code) plugin |
+
+## Quick Start
+
+```bash
+# Clone & install
+git clone https://github.com/lukebaze/oh-my-kira.git
+cd oh-my-kira
+npm install
+npm link
+
+# Run
+oh-my-kira --watch ~/.claude/buddy/state.json
+```
+
+### Launch from Claude Code
+
+```
+/buddies launch
+```
+
+> Auto-splits your Ghostty terminal and starts the renderer in a side pane.
+
+### CLI Options
+
+| Flag | Description | Default |
+|------|-------------|---------|
+| `--watch <path>` | Buddy state JSON file | `~/.claude/buddy/state.json` |
+| `--art-packs <dir>` | Art packs directory | `~/.claude/buddy/art-packs/` |
+
 ## Art Packs
 
-Art packs live in `~/.claude/buddy/art-packs/`. Two are bundled:
+Two packs are bundled out of the box:
 
-- **kira** - Anime girl companion
-- **wpenguin** - Pixel art penguin
+| Pack | Style | Preview |
+|------|-------|---------|
+| **kira** | Anime companion | <img src="assets/screenshots/screenshot.png" width="180"> |
+| **wpenguin** | Pixel art penguin | *coming soon* |
 
-### Art Pack Structure
+### Create Your Own
 
 ```
 my-pack/
@@ -102,14 +107,15 @@ my-pack/
     ...
 ```
 
-### pack.json
+<details>
+<summary><strong>pack.json reference</strong></summary>
 
 ```json
 {
   "name": "My Pack",
   "author": "you",
   "version": "1.0.0",
-  "description": "Description of the art pack",
+  "description": "A custom art pack",
   "format": "spritesheet-grid",
   "frame_size": { "width": 768, "height": 448 },
   "grid_cols": 4,
@@ -123,27 +129,48 @@ my-pack/
 
 | Field | Description |
 |-------|-------------|
-| `format` | `spritesheet-grid` (grid layout) or `spritesheet` (horizontal strip) |
-| `frame_size` | Width and height of each frame in pixels |
-| `grid_cols` | Number of columns in the spritesheet grid |
-| `scale` | Pre-scale factor applied to frames (1 = original size) |
-| `state_map` | Maps visual states to spritesheets, frame counts, and animation speed |
+| `format` | `spritesheet-grid` (grid) or `spritesheet` (horizontal strip) |
+| `frame_size` | Pixel dimensions of each frame |
+| `grid_cols` | Columns in the spritesheet grid |
+| `scale` | Pre-scale factor (1 = original) |
+| `state_map` | Maps states to sheets, frame counts, and animation speed |
+
+</details>
 
 ### Visual States
 
-| State | Triggered when |
-|-------|---------------|
-| `idle` | Default state |
-| `happy` | Happiness > 80% |
-| `very_happy` | Happiness > 95% |
-| `working` | During active coding |
+Your buddy automatically switches between states based on what's happening:
+
+| State | Trigger |
+|-------|---------|
+| `idle` | Default — nothing happening |
+| `working` | Active coding session |
+| `happy` / `very_happy` | Happiness > 80% / > 95% |
 | `energy_low` | Energy < 30% |
 | `hunger_low` | Hunger < 30% |
 | `hygiene_low` | Hygiene < 30% |
 | `error` | Test failure or error |
 | `critical` | Multiple stats critically low |
-| `session_start` | Coding session begins |
-| `session_end` | Coding session ends |
+| `session_start` / `session_end` | Session lifecycle events |
+
+## Architecture
+
+```
+bin/
+  oh-my-kira.js          # CLI entry point
+lib/
+  renderer.js            # Render loop & animation orchestrator
+  sprite-loader.js       # Spritesheet slicing & background removal
+  kitty.js               # Kitty graphics protocol (escape sequences)
+  layout.js              # Responsive terminal layout calculator
+  watcher.js             # File watcher (chokidar)
+  state-resolver.js      # Buddy state → visual state mapping
+  speech-bubble.js       # Speech bubble rendering
+  idle-thoughts.js       # Random idle thought messages
+assets/
+  kira/                  # Bundled: anime companion
+  wpenguin/              # Bundled: pixel penguin
+```
 
 ## Development
 
@@ -152,25 +179,6 @@ git clone https://github.com/lukebaze/oh-my-kira.git
 cd oh-my-kira
 npm install
 npm test
-```
-
-### Project Structure
-
-```
-bin/
-  oh-my-kira.js              # CLI entry point
-lib/
-  renderer.js                # Main render loop and animation
-  sprite-loader.js           # Spritesheet slicing and background removal
-  kitty.js                   # Kitty graphics protocol escape sequences
-  layout.js                  # Responsive terminal layout calculator
-  watcher.js                 # File watcher (chokidar)
-  state-resolver.js          # Maps buddy state to visual states
-  speech-bubble.js           # Speech bubble rendering
-  idle-thoughts.js           # Random idle thought messages
-assets/
-  kira/                      # Bundled art pack
-  wpenguin/                  # Bundled art pack
 ```
 
 ## License
