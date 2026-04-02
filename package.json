@@ -1,14 +1,14 @@
 {
-  "name": "claude-buddy-renderer",
+  "name": "oh-my-kira",
   "version": "1.0.0",
   "description": "Terminal renderer for Claude Buddy — displays your coding companion via Kitty graphics protocol",
   "type": "module",
   "bin": {
-    "claude-buddy-renderer": "./bin/claude-buddy-renderer.js"
+    "oh-my-kira": "./bin/oh-my-kira.js"
   },
   "scripts": {
     "test": "node --test test/*.test.js",
-    "start": "node bin/claude-buddy-renderer.js"
+    "start": "node bin/oh-my-kira.js"
   },
   "dependencies": {
     "sharp": "^0.33.0",

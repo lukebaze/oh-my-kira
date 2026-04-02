@@ -16,7 +16,7 @@ const artPacksDir =
     ? args[args.indexOf("--art-packs") + 1]
     : path.join(os.homedir(), ".claude", "buddy", "art-packs");
 
-console.log(`Claude Buddy Renderer v1.0.0`);
+console.log(`Oh My Kira v1.0.0`);
 console.log(`Watching: ${statePath}`);
 console.log(`Art packs: ${artPacksDir}`);
 console.log("");

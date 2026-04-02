@@ -1,8 +1,8 @@
-# Claude Buddy Renderer
+# Oh My Kira
 
 Terminal renderer for [Claude Buddy](https://github.com/anthropics/claude-code) companions. Displays an animated sprite with live stats in your terminal using the [Kitty graphics protocol](https://sw.kovidgoyal.net/kitty/graphics-protocol/).
 
-![Claude Buddy in Ghostty](https://img.shields.io/badge/terminal-Ghostty%20%7C%20Kitty-blue)
+![Oh My Kira in Ghostty](https://img.shields.io/badge/terminal-Ghostty%20%7C%20Kitty-blue)
 
 ## Requirements
 
@@ -13,20 +13,20 @@ Terminal renderer for [Claude Buddy](https://github.com/anthropics/claude-code) 
 ## Installation
 
 ```bash
-git clone https://github.com/anthropics/claude-buddy-renderer.git
-cd claude-buddy-renderer
+git clone https://github.com/lukebaze/oh-my-kira.git
+cd oh-my-kira
 npm install
 npm link
 ```
 
-This makes `claude-buddy-renderer` available globally in your terminal.
+This makes `oh-my-kira` available globally in your terminal.
 
 ## Usage
 
 ### Basic
 
 ```bash
-claude-buddy-renderer --watch ~/.claude/buddy/state.json
+oh-my-kira --watch ~/.claude/buddy/state.json
 ```
 
 ### Options
@@ -51,7 +51,7 @@ This auto-splits your Ghostty terminal and starts the renderer in the right pane
 Open a second pane/tab and run:
 
 ```bash
-claude-buddy-renderer --watch ~/.claude/buddy/state.json
+oh-my-kira --watch ~/.claude/buddy/state.json
 ```
 
 ## How It Works
@@ -144,8 +144,8 @@ my-pack/
 ## Development
 
 ```bash
-git clone https://github.com/anthropics/claude-buddy-renderer.git
-cd claude-buddy-renderer
+git clone https://github.com/lukebaze/oh-my-kira.git
+cd oh-my-kira
 npm install
 npm test
 ```
@@ -154,7 +154,7 @@ npm test
 
 ```
 bin/
-  claude-buddy-renderer.js   # CLI entry point
+  oh-my-kira.js              # CLI entry point
 lib/
   renderer.js                # Main render loop and animation
   sprite-loader.js           # Spritesheet slicing and background removal
