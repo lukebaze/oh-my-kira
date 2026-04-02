@@ -1,0 +1,22 @@
+{
+  "name": "claude-buddy-renderer",
+  "version": "1.0.0",
+  "description": "Terminal renderer for Claude Buddy — displays your coding companion via Kitty graphics protocol",
+  "type": "module",
+  "bin": {
+    "claude-buddy-renderer": "./bin/claude-buddy-renderer.js"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "start": "node bin/claude-buddy-renderer.js"
+  },
+  "dependencies": {
+    "sharp": "^0.33.0",
+    "chokidar": "^4.0.0"
+  },
+  "files": [
+    "bin/",
+    "lib/",
+    "assets/"
+  ]
+}

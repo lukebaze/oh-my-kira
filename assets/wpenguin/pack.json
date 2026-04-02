@@ -1,0 +1,24 @@
+{
+  "name": "W-Penguin",
+  "author": "wpenguin",
+  "version": "1.0.0",
+  "description": "Pixel art penguin - the default buddy",
+  "format": "spritesheet",
+  "frame_size": { "width": 64, "height": 64 },
+  "upscale": 4,
+  "upscale_filter": "nearest",
+  "state_map": {
+    "idle":          { "sheet": "Idle.png",         "frames": 2, "interval_ms": 500 },
+    "happy":         { "sheet": "Flap.png",         "frames": 2, "interval_ms": 300 },
+    "very_happy":    { "sheet": "Spin Attack.png",  "frames": 7, "interval_ms": 120 },
+    "working":       { "sheet": "Walk.png",         "frames": 6, "interval_ms": 200 },
+    "energy_low":    { "sheet": "Crouch.png",       "frames": 1, "interval_ms": 500 },
+    "hunger_low":    { "sheet": "Fall.png",         "frames": 1, "interval_ms": 500 },
+    "error":         { "sheet": "Hurt.png",         "frames": 4, "interval_ms": 200 },
+    "critical":      { "sheet": "Death.png",        "frames": 1, "interval_ms": 500 },
+    "session_start": { "sheet": "Jump.png",         "frames": 2, "interval_ms": 250 },
+    "session_end":   { "sheet": "Land.png",         "frames": 2, "interval_ms": 300 },
+    "hygiene_low":   { "sheet": "Roll.png",         "frames": 4, "interval_ms": 200 },
+    "turn":          { "sheet": "Turn.png",         "frames": 1, "interval_ms": 500 }
+  }
+}
