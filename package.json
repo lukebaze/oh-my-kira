@@ -4,7 +4,8 @@
   "description": "Terminal renderer for Claude Buddy — displays your coding companion via Kitty graphics protocol",
   "type": "module",
   "bin": {
-    "oh-my-kira": "./bin/oh-my-kira.js"
+    "oh-my-kira": "./bin/oh-my-kira.js",
+    "oh-my-kira-brain": "./bin/brain-daemon.js"
   },
   "scripts": {
     "test": "node --test test/*.test.js",
