@@ -27,6 +27,19 @@ describe("renderSpeechBubble", () => {
       assert.ok(line.length <= 30);
     }
   });
+
+  it("wraps long text into multiple content lines", () => {
+    const lines = renderSpeechBubble("This is a really long thought that should wrap across multiple lines in the bubble", 30);
+    assert.ok(lines.length > 4);
+  });
+
+  it("preserves word boundaries when wrapping", () => {
+    const lines = renderSpeechBubble("Hello world testing", 16);
+    const contentLines = lines.slice(1, -2);
+    for (const line of contentLines) {
+      assert.ok(!line.endsWith("-"), "Should not break mid-word");
+    }
+  });
 });
 
 describe("clearSpeechBubble", () => {
