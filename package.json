@@ -11,8 +11,10 @@
     "start": "node bin/oh-my-kira.js"
   },
   "dependencies": {
-    "sharp": "^0.33.0",
-    "chokidar": "^4.0.0"
+    "@anthropic-ai/sdk": "^0.82.0",
+    "better-sqlite3": "^12.8.0",
+    "chokidar": "^4.0.0",
+    "sharp": "^0.33.0"
   },
   "files": [
     "bin/",
