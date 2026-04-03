@@ -38,12 +38,12 @@ function scheduleAmbientThought() {
   }, delay);
 }
 
-function onStateChange(state) {
+async function onStateChange(state) {
   lastState = state;
 
   if (state.chat && state.chat.pending && state.chat.message) {
     console.log("[brain] Processing chat message...");
-    brain.processChat(state);
+    await brain.processChat(state);
     scheduleAmbientThought();
     return;
   }
